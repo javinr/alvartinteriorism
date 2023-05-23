@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/javinr/alvartinteriorism/issues"
   },
-  "homepage": "https://github.com/javinr/alvartinteriorism#readme"
+  "homepage": "https://github.com/javinr/alvartinteriorism#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }
