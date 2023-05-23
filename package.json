@@ -1,0 +1,19 @@
+{
+  "name": "alvartinteriorism",
+  "version": "1.0.0",
+  "description": "alvartinteriorism",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javinr/alvartinteriorism.git"
+  },
+  "author": "javinr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javinr/alvartinteriorism/issues"
+  },
+  "homepage": "https://github.com/javinr/alvartinteriorism#readme"
+}
