@@ -16,26 +16,30 @@ const isProd = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
+function console(text, globs) {
+  console.log(text + ': ' + globs);
+  return globs;
+}
 function styles() {
-  return src('app/styles/*.css', {
+  return src('app/css/*.css', {
     sourcemaps: !isProd,
   })
     .pipe($.postcss([
       autoprefixer()
     ]))
-    .pipe(dest('.tmp/styles', {
+    .pipe(dest('.tmp/css', {
       sourcemaps: !isProd,
     }))
     .pipe(server.reload({stream: true}));
 };
 
 function scripts() {
-  return src('app/scripts/**/*.js', {
+  return src('app/js/**/*.js', {
     sourcemaps: !isProd,
   })
     .pipe($.plumber())
     .pipe($.babel())
-    .pipe(dest('.tmp/scripts', {
+    .pipe(dest('.tmp/js', {
       sourcemaps: !isProd ? '.' : false,
     }))
     .pipe(server.reload({stream: true}));
@@ -50,8 +54,8 @@ const lintBase = (files, options) => {
     .pipe($.if(!server.active, $.eslint.failAfterError()));
 }
 function lint() {
-  return lintBase('app/scripts/**/*.js', { fix: true })
-    .pipe(dest('app/scripts'));
+  return lintBase('app/js/**/*.js', { fix: true })
+    .pipe(dest('app/js'));
 };
 function lintTest() {
   return lintBase('test/spec/**/*.js');
@@ -75,26 +79,39 @@ function html() {
     .pipe(dest('dist'));
 }
 
+
 function images() {
-  return src('app/images/**/*', { since: lastRun(images) })
+  return src('app/assets/img/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
-    .pipe(dest('dist/images'));
+    .pipe(dest('dist/assets/img'));
 };
 
 function fonts() {
-  return src('app/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-    .pipe($.if(!isProd, dest('.tmp/fonts'), dest('dist/fonts')));
+  return src('app/assets/fonts/**/*.{eot,svg,ttf,woff,woff2}')
+    .pipe($.if(!isProd, dest('.tmp/assets/fonts'), dest('dist/assets/fonts')));
 };
 
 function extras() {
   return src([
     'app/*',
-    '!app/*.html'
+    '!app/*.html',
+    '!app/js',
+    '!app/css'
   ], {
     dot: true
   }).pipe(dest('dist'));
 };
 
+function copyJs() {
+  return src('app/js/*.js')
+    .pipe($.uglify({compress: {drop_console: true}}))
+    .pipe(dest('dist/js'))
+}
+function copyCss() {
+  return src('app/css/*.css')
+    .pipe($.postcss([cssnano({safe: true, autoprefixer: false})]))
+    .pipe(dest('dist/css'))
+}
 function clean() {
   return del(['.tmp', 'dist'])
 }
@@ -113,6 +130,8 @@ const build = series(
     fonts,
     extras
   ),
+  copyCss,
+  copyJs,
   measureSize
 );
 
