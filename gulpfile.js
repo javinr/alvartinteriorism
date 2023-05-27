@@ -17,25 +17,25 @@ const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
 function styles() {
-  return src('app/styles/*.css', {
+  return src('app/css/*.css', {
     sourcemaps: !isProd,
   })
     .pipe($.postcss([
       autoprefixer()
     ]))
-    .pipe(dest('.tmp/styles', {
+    .pipe(dest('.tmp/css', {
       sourcemaps: !isProd,
     }))
     .pipe(server.reload({stream: true}));
 };
 
 function scripts() {
-  return src('app/scripts/**/*.js', {
+  return src('app/js/**/*.js', {
     sourcemaps: !isProd,
   })
     .pipe($.plumber())
     .pipe($.babel())
-    .pipe(dest('.tmp/scripts', {
+    .pipe(dest('.tmp/js', {
       sourcemaps: !isProd ? '.' : false,
     }))
     .pipe(server.reload({stream: true}));
@@ -50,8 +50,8 @@ const lintBase = (files, options) => {
     .pipe($.if(!server.active, $.eslint.failAfterError()));
 }
 function lint() {
-  return lintBase('app/scripts/**/*.js', { fix: true })
-    .pipe(dest('app/scripts'));
+  return lintBase('app/js/**/*.js', { fix: true })
+    .pipe(dest('app/js'));
 };
 function lintTest() {
   return lintBase('test/spec/**/*.js');
@@ -60,6 +60,9 @@ function lintTest() {
 function html() {
   return src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+    .pipe($.debug({ title: 'useref:' }))
+    .pipe(src(['.tmp/**/*.js', '.tmp/**/*.css']))
+    .pipe($.debug({ title: 'added src:' }))
     .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
     .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
     .pipe($.if(/\.html$/, $.htmlmin({
@@ -76,14 +79,14 @@ function html() {
 }
 
 function images() {
-  return src('app/images/**/*', { since: lastRun(images) })
+  return src('app/assets/img/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
-    .pipe(dest('dist/images'));
+    .pipe(dest('dist/assets/img'));
 };
 
 function fonts() {
-  return src('app/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-    .pipe($.if(!isProd, dest('.tmp/fonts'), dest('dist/fonts')));
+  return src('app/assets/fonts/**/*.{eot,svg,ttf,woff,woff2}')
+    .pipe($.if(!isProd, dest('.tmp/assets/fonts'), dest('dist/fonts')));
 };
 
 function extras() {
@@ -130,13 +133,13 @@ function startAppServer() {
 
   watch([
     'app/*.html',
-    'app/images/**/*',
-    '.tmp/fonts/**/*'
+    'app/assets/img/**/*',
+    '.tmp/assets/fonts/**/*'
   ]).on('change', server.reload);
 
-  watch('app/styles/**/*.css', styles);
-  watch('app/scripts/**/*.js', scripts);
-  watch('app/fonts/**/*', fonts);
+  watch('app/css/**/*.css', styles);
+  watch('app/js/**/*.js', scripts);
+  watch('app/assets/fonts/**/*', fonts);
 }
 
 function startTestServer() {
@@ -147,14 +150,14 @@ function startTestServer() {
     server: {
       baseDir: 'test',
       routes: {
-        '/scripts': '.tmp/scripts',
+        '/js': '.tmp/js',
         '/node_modules': 'node_modules'
       }
     }
   });
 
   watch('test/index.html').on('change', server.reload);
-  watch('app/scripts/**/*.js', scripts);
+  watch('app/js/**/*.js', scripts);
   watch('test/spec/**/*.js', lintTest);
 }
 
