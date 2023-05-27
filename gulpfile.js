@@ -16,10 +16,6 @@ const isProd = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
-function console(text, globs) {
-  console.log(text + ': ' + globs);
-  return globs;
-}
 function styles() {
   return src('app/css/*.css', {
     sourcemaps: !isProd,
@@ -64,6 +60,9 @@ function lintTest() {
 function html() {
   return src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+    .pipe($.debug({ title: 'useref:' }))
+    .pipe(src(['.tmp/**/*.js', '.tmp/**/*.css']))
+    .pipe($.debug({ title: 'added src:' }))
     .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
     .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
     .pipe($.if(/\.html$/, $.htmlmin({
@@ -79,7 +78,6 @@ function html() {
     .pipe(dest('dist'));
 }
 
-
 function images() {
   return src('app/assets/img/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
@@ -94,24 +92,12 @@ function fonts() {
 function extras() {
   return src([
     'app/*',
-    '!app/*.html',
-    '!app/js',
-    '!app/css'
+    '!app/*.html'
   ], {
     dot: true
   }).pipe(dest('dist'));
 };
 
-function copyJs() {
-  return src('app/js/*.js')
-    .pipe($.uglify({compress: {drop_console: true}}))
-    .pipe(dest('dist/js'))
-}
-function copyCss() {
-  return src('app/css/*.css')
-    .pipe($.postcss([cssnano({safe: true, autoprefixer: false})]))
-    .pipe(dest('dist/css'))
-}
 function clean() {
   return del(['.tmp', 'dist'])
 }
@@ -130,8 +116,6 @@ const build = series(
     fonts,
     extras
   ),
-  copyCss,
-  copyJs,
   measureSize
 );
 
@@ -149,13 +133,13 @@ function startAppServer() {
 
   watch([
     'app/*.html',
-    'app/images/**/*',
-    '.tmp/fonts/**/*'
+    'app/assets/img/**/*',
+    '.tmp/assets/fonts/**/*'
   ]).on('change', server.reload);
 
-  watch('app/styles/**/*.css', styles);
-  watch('app/scripts/**/*.js', scripts);
-  watch('app/fonts/**/*', fonts);
+  watch('app/css/**/*.css', styles);
+  watch('app/js/**/*.js', scripts);
+  watch('app/assets/fonts/**/*', fonts);
 }
 
 function startTestServer() {
@@ -166,14 +150,14 @@ function startTestServer() {
     server: {
       baseDir: 'test',
       routes: {
-        '/scripts': '.tmp/scripts',
+        '/js': '.tmp/js',
         '/node_modules': 'node_modules'
       }
     }
   });
 
   watch('test/index.html').on('change', server.reload);
-  watch('app/scripts/**/*.js', scripts);
+  watch('app/js/**/*.js', scripts);
   watch('test/spec/**/*.js', lintTest);
 }
 
