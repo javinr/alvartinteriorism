@@ -60,7 +60,7 @@ function fadeOut(el) {
     el.style.opacity = 1;
     (function fade() {
         if ((el.style.opacity -= .1) < 0) {
-            el.style.display = "none";
+            el.style.display = 'none';
         } else {
             requestAnimationFrame(fade);
         }
@@ -69,7 +69,7 @@ function fadeOut(el) {
 
 function fadeIn(el, display) {
     el.style.opacity = 0;
-    el.style.display = display || "block";
+    el.style.display = display || 'block';
     (function fade() {
         var val = parseFloat(el.style.opacity);
         if (!((val += .1) > 1)) {
