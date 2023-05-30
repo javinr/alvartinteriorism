@@ -31,14 +31,15 @@
     "gulp-size": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-useref": "^3.1.6",
+    "jekyll": "^3.0.0-beta1",
     "mocha": "^6.2.3",
     "yargs": "13.2.4"
   },
   "scripts": {
     "serve:test": "cross-env NODE_ENV=test gulp serve",
     "serve:dist": "cross-env NODE_ENV=production gulp serve",
-    "start": "gulp serve",
-    "build": "cross-env NODE_ENV=production gulp",
+    "start": "jekyll serve",
+    "build": "jekyll build",
     "test": "npm run serve:test",
     "tasks": "gulp --tasks"
   },
