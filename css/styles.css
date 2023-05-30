@@ -11015,10 +11015,10 @@ footer.footer .social-link:hover {
   padding-top: 8rem;
   padding-bottom: 8rem;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
-  background-image: url("../assets/img/logo_alvart_5000x1529.png"), url("../assets/img/portada_background-17.png");
-  background-position: top center, center center;
-  background-repeat: no-repeat, no-repeat;
-  background-size: contain, contain;
+  background-image: url("../assets/img/portada_background-with-logo.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .masthead h1, .masthead .h1 {
   font-size: 4rem;
