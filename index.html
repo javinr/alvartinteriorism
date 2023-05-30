@@ -43,7 +43,7 @@ layout: default
                 <div class="row gx-0">
                 {% for reference in site.references %}
                     <div class="col-lg-6">
-                        <a class="portfolio-item" href="#!">
+                        <a class="portfolio-item" href="{{ reference.url }}">
                             <div class="caption">
                                 <div class="caption-content">
                                     <div class="h2">{{ reference.name }}</div>
@@ -150,3 +150,4 @@ layout: default
         </div>
     </div>
 </section>
+<
