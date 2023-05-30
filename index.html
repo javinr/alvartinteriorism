@@ -41,40 +41,19 @@ layout: default
         <div class="row" id="about-references">
             <h2>Mis referentes</h3>
                 <div class="row gx-0">
+                {% for reference in site.references %}
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#!">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Kelly Hopen</div>
-                                    <p class="mb-0">Me apasiona...</p>
+                                    <div class="h2">{{ reference.name }}</div>
+                                    <p class="mb-0">{{ reference.content | truncatewords: 3 }}</p>
                                 </div>
                             </div>
-                            <img class="img-fluid" src="assets/img/bed-kelly-hopen-ratiofixed.jpeg" alt="Cama diseñada por Kelly Hopen, en habitación con suelo de madera, de fondo un ventanal con vistas a las montañas" />
+                            <img class="img-fluid" src="{{ reference.image }}" alt="{{ reference.alt }}" />
                         </a>
                     </div>
-                    <div class="col-lg-6">
-                        <a class="portfolio-item" href="#!">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <div class="h2">Jean-Louis Deniot</div>
-                                    <p class="mb-0">Un Maestro...</p>
-                                </div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/table-jean-louis-deniot-ratiofixed.png" alt="Mesa diseñada por Jean Louis Deniot, estilizada, de color gris, de aspecto metálico" />
-                        </a>
-                    </div>
-                    <div class="col-lg-6">
-                        <a class="portfolio-item" href="#!">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <div class="h2">Regardt van der Meulen</div>
-                                    <p class="mb-0">Increíble escultor...</p>
-                                </div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/sculpture-women-regardt-van-der-meulen.jpg" alt="Escultura de una mujer realizada por Regard van der Meulen" />
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
         </div>
     </div>
     <div class="container px-4 px-lg-5 text-center">
@@ -82,19 +61,13 @@ layout: default
             <h2>Estudios</h2>
             <div class="row gx-0">
                 <div class="col-sm">
-                    <ul>
-                        <li>Master en Interiorismo, Diseño de Interiores y 3D. Certificado por ESNECA. Marzo 2019</li>
-                        <li>Master en Diseño de Interiores y Hospitality. Certificado por LABASAD. Noviembre 2019- Diciembre 2020</li>
-                        <li>Diseño de Iluminación para espacios interiores. Certificado por Mónica Vega.</li>
-                        <li>Representación de espacios Arquitectónicos con 3d Max. Infografía Arquitectónica. Estudio Phrame , Vanesa ... y Jose Luis Diaz Acosta.</li>
-                        <li>Diseño de Interiores para restaurantes. Certificado por MASQUEESPACIO.</li>
-                        <li>Color aplicado al Diseño de Interiores. Certificado por Miriam Alía.</li>
-                        <li>Fundamentos del diseño de interiores: domina colores y texturas. Certificado por Shari Francis</li>
-                        <li>Las instalaciones Técnicas en los edificios y construcciones. Certificado por Udemy.</li>
-                        <li>Curso Dialux Evo 9. Certificado por Udemy</li>
+                    <ul class="list-unstyled list-group bg-dark text-white">
+                        {% for study in site.data.studies %}
+                        <li class="list-group-item text-start"><i class="fas fa-book-open fa-xl"></i>{{ study.name }}. Certificado por {{study.certified_by }}</li>
+                        {% endfor %}
                     </ul>
                 </div>
-                <div class="col-sm bg-secondary">
+                <div class="col-sm">
                     <div class="row">
                         <div class="col-sm">
                             <img class="img-fluid" src="assets/img/estudios-paleta-1.jpg" />
