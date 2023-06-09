@@ -1,6 +1,8 @@
 ---
 layout: reference
+id: kelly-hopen
 name: Kelly Hopen
+subtitle: Simplicidad y buen gusto
 image: /assets/img/bed-kelly-hopen-ratiofixed.jpeg
 alt: Cama diseñada por Kelly Hopen, en habitación con suelo de madera, de fondo un ventanal con vistas a las montañas
 ---

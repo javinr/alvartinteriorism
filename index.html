@@ -40,32 +40,21 @@ layout: default
     <div class="container px-4 px-lg-5 text-center">
         <div class="row" id="about-references">
             <h2>Mis referentes</h3>
-                <div class="row gx-0">
+            <div class="row gx-0">
                 {% for reference in site.references %}
-                    <div class="col-lg-6">
-                        <a class="portfolio-item" href="{{ reference.url }}">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <div class="h2">{{ reference.name }}</div>
-                                    <p class="mb-0">{{ reference.content | truncatewords: 3 }}</p>
-                                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#!" data-bs-toggle="modal" data-bs-target="#modal-{{ reference.id | slugify }}">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <div class="h2">{{ reference.name }}</div>
+                                <p class="mb-0">{{ reference.subtitle }}</p>
                             </div>
-                            <img class="img-fluid" src="{{ reference.image }}" alt="{{ reference.alt }}" />
-                        </a>
-                    </div>
-                {% endfor %}
-                    <div class="col-lg-6">
-                        <a class="portfolio-item" href="#!" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <div class="h2">Una referencia modal</div>
-                                    <p class="mb-0">Pulsa para abrir...</p>
-                                </div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/portfolio-1.jpg" alt="..." />
-                        </a>
-                    </div>
+                        </div>
+                        <img class="img-fluid" src="{{ reference.image }}" alt="{{ reference.alt }}" />
+                    </a>
                 </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="container px-4 px-lg-5 text-center">
@@ -180,3 +169,22 @@ layout: default
       </div>
     </div>
   </div>
+{% for reference in site.references %}
+<div class="modal fade" id="modal-{{ reference.id | slugify }}" tabindex="-1" aria-labelledby="modal-{{ reference.id | slugify }}-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-black">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ reference.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <img class="img-fluid" src="{{ reference.image }}" alt="{{ reference.alt }}"/>
+                {{ reference.content }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

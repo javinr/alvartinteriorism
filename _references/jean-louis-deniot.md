@@ -1,6 +1,8 @@
 ---
 layout: reference
+id: jean-louis-deniot
 name: Jean-Louis Deniot
+subtitle: El alma libre de los estilos
 image: /assets/img/table-jean-louis-deniot-ratiofixed.png
 alt: Mesa diseñada por Jean Louis Deniot, estilizada, de color gris, de aspecto metálico
 ---
