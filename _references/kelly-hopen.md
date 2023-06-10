@@ -1,6 +1,5 @@
 ---
 layout: reference
-id: kelly-hopen
 name: Kelly Hopen
 subtitle: Simplicidad y buen gusto
 image: /assets/img/bed-kelly-hopen-ratiofixed.jpeg

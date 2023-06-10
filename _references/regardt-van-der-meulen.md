@@ -1,6 +1,5 @@
 ---
 layout: reference
-id: regardt-van-der-meulen
 name: Regardt van der Meulen
 subtitle: Un sartista de lo efímero
 image: /assets/img/sculpture-women-regardt-van-der-meulen.jpg
