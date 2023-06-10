@@ -95,55 +95,33 @@ layout: default
             </p>
         </div>
         <div class="row gx-0">
+            {% for project in site.projects %}
             <div class="col-lg-6">
-                <a class="portfolio-item" href="project-1.html#page-top">
+                <a class="portfolio-item" href="{{ project.id | slugify}}.html#page-top">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2">Vivienda</div>
-                            <p class="mb-0">Vivienda ático barrio de Argüelles Madrid</p>
+                            <div class="h1 text-uppercase">{{ project.name }}</div>
                         </div>
                     </div>
-                    <img class="img-fluid" src="assets/img/portfolio-1.jpg" alt="..." />
+                    <img class="img-fluid" src="{{ project.image }}" alt="{{ project.alt }}" />
                 </a>
             </div>
-            <div class="col-lg-6">
-                <a class="portfolio-item" href="project-2.html#page-top">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <div class="h2">Hotel</div>
-                            <p class="mb-0">Noveau Art Hotel</p>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/portfolio-2.jpg" alt="..." />
-                </a>
-            </div>
+            {% endfor %}
             <div class="col-lg-6">
                 <a class="portfolio-item" href="#!">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2">Strawberries</div>
+                            <div class="h1 text-uppercase">Strawberries</div>
                             <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
                         </div>
                     </div>
                     <img class="img-fluid" src="assets/img/portfolio-3.jpg" alt="..." />
                 </a>
             </div>
-            <div class="col-lg-6">
-                <a class="portfolio-item" href="#!">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <div class="h2">Workspace</div>
-                            <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/portfolio-4.jpg" alt="..." />
-                </a>
-            </div>
         </div>
     </div>
 </section>
-
-<!-- Map-->
+<!-- ******************************** MAP ********************************** -->
 <section class="content-section" id="contact">
     <div container px-4 px-lg-5>
         <div class="map" id="contact">
@@ -151,24 +129,7 @@ layout: default
         </div>
     </div>
 </section>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Una referencia modal</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <img class="img-fluid" src="assets/img/portfolio-1.jpg" />
-          <p class="text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu. A erat nam at lectus urna. Magna eget est lorem ipsum dolor sit amet consectetur adipiscing. Egestas sed sed risus pretium. Nisl nisi scelerisque eu ultrices vitae auctor eu augue. Consectetur adipiscing elit duis tristique sollicitudin nibh. Ullamcorper sit amet risus nullam eget. Lacus vel facilisis volutpat est velit egestas dui id ornare. Sit amet nisl purus in mollis nunc sed id. Urna condimentum mattis pellentesque id. Euismod in pellentesque massa placerat duis. Malesuada pellentesque elit eget gravida cum sociis natoque. Sit amet nisl purus in mollis nunc sed id. Tristique senectus et netus et malesuada. Convallis a cras semper auctor neque vitae tempus quam. Cras pulvinar mattis nunc sed blandit libero volutpat sed cras. Rhoncus urna neque viverra justo nec.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- ********************* MODALES PARA REFERENTES ************************ -->
 {% for reference in site.references %}
 <div class="modal fade" id="modal-{{ reference.id | slugify }}" tabindex="-1" aria-labelledby="modal-{{ reference.id | slugify }}-label" aria-hidden="true">
     <div class="modal-dialog">

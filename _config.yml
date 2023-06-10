@@ -1,3 +1,4 @@
 collections:
   references:
     output: true
+  projects:
