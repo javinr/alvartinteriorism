@@ -2,3 +2,7 @@ collections:
   references:
     output: true
   projects:
+    order:
+      - vivienda-atico-barrio-arguelles.md
+      - noveau-art-hotel.md
+      - project-3.md
