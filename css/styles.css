@@ -633,7 +633,7 @@ progress {
 .container-md,
 .container-sm {
   --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
+  --bs-gutter-y: 0rem;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
@@ -11118,5 +11118,16 @@ footer.footer .social-link:hover {
 
 h1,h2,h3,h4,h5,h6 {
   padding-top: 3rem;
-  text-align: center; 
+  text-align: center;
+}
+
+@keyframes fill-glow-keyframe {
+from {opacity:0}
+to {opacity:1}
+}
+.fill-glow {
+animation-name: fill-glow-keyframe;
+animation-duration:2s;
+animation-delay: 5s;
+animation-iteration-count: 5;
 }
