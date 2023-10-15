@@ -90,11 +90,11 @@ layout: default
         </div>
         <div class="row gx-0">
             {% for project in site.projects %}
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <a class="portfolio-item" href="{{ project.id | slugify}}.html#page-top">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h1 text-uppercase">{{ project.name }}</div>
+                            <div class="h2 text-uppercase">{{ project.name }}</div>
                         </div>
                     </div>
                     <img class="img-fluid" src="{{ project.image }}" alt="{{ project.alt }}" />
