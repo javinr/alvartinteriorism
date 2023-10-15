@@ -94,10 +94,10 @@ layout: default
                 <a class="portfolio-item" href="{{ project.id | slugify}}.html#page-top">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2 text-uppercase">{{ project.name }}</div>
+                            <div class="h1">{{ project.caption }}</div>
                         </div>
                     </div>
-                    <img class="img-fluid" src="{{ project.image }}" alt="{{ project.alt }}" />
+                    <img class="img-thumbnail" src="/assets/img/thumbnails_square_w600/{{ project.image }}" alt="{{ project.alt }}" />
                 </a>
             </div>
             {% endfor %}
