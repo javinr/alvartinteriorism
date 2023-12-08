@@ -17,7 +17,7 @@ layout: default
     <h1 class="bg-gradient">Sobre mi</h1>
     <div class="container px-4 px-lg-5 text-center">
         <div class="row" >
-            <div class="col-6 vertical-centered" id="about-me">
+            <div class="col-sm-6 vertical-centered" id="about-me">
                 <p class="text-center">
                     Tras una trayectoria profesional intensa en el mundo de la Abogacía ejerciente durante 16 años, llegó un momento de hastío en el que se produjo un punto de inflexión en mi vida, y por consiguiente la necesidad de reinventarme a todos los niveles. Una vez que nuestro hijo adoptado llegó a nuestro mundo, y apartada del mundo laboral durante unos años por motivos personales , decidí dar un vuelco a mi vida profesional y formarme en el mundo del Interiorismo.
                     <br/><br/>
@@ -26,7 +26,7 @@ layout: default
                     Pilar Alvarez. Asturias, 1974
                 </p>
             </div>
-            <div class="col-6 vertical-centered">
+            <div class="col-sm-6 vertical-centered">
                 <img class="img-fluid" src="assets/img/foto-pilar.jpg" />
             </div>
         </div>
@@ -36,7 +36,7 @@ layout: default
         <div class="row" id="about-references">
             <div class="row gx-0">
                 {% for reference in site.references %}
-                <div class="col-4">
+                <div class="col-md-4">
                     <a class="portfolio-item" href="#!" data-bs-toggle="modal" data-bs-target="#modal-{{ reference.id | slugify }}">
                         <div class="caption">
                             <div class="caption-content">
@@ -90,7 +90,7 @@ layout: default
         </div>
         <div class="row gx-0">
             {% for project in site.projects %}
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <a class="portfolio-item" href="{{ project.id | slugify}}.html#page-top">
                     <div class="caption">
                         <div class="caption-content">
